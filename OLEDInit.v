@@ -52,7 +52,7 @@ module OLED_Init
     reg done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            i <= 8'd0;
+            state <= 8'd0;
 			start <= 1'b0;
 			done  <= 1'b0;
 			data  <= 8'h00;
