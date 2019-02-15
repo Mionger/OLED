@@ -17,7 +17,7 @@ module OLED_Init
 
     output DONE;
     output WRITE_START;
-    output [7:0]DATA;
+    output [9:0]DATA;
     output RST_OLED;
 
     reg RST_OLED;
@@ -55,7 +55,7 @@ module OLED_Init
     parameter MASTER_CURRENT_CONTROL          = 8'd7;
     parameter MASTER_CURRENT_CONTROL_ARGUMENT = 8'd8;
     reg [7:0]state;
-    reg [7:0]data;
+    reg [9:0]data;
     reg start;
     reg done;
     always @(posedge CLK or negedge RST_N) begin
@@ -63,7 +63,7 @@ module OLED_Init
             		state <= 8'd0;
 			start <= 1'b0;
 			done  <= 1'b0;
-			data  <= 8'h00;
+			data  <= {2'b11,8'h00};
         end
         else if (START & rst_done) begin
             case (state)
@@ -73,7 +73,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'hAE;// commmand code
+                        data  <= {2'b00,8'hAE};// commmand code
                         start <= 1'b1;
                     end
                 end
@@ -83,7 +83,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'h81;//command code
+                        data  <= {2'b00,8'h81};//command code
                         start <= 1'b1;
                     end
                 end
@@ -93,7 +93,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'hFF;//argument
+                        data  <= {2'b00,8'hFF};//argument
                         start <= 1'b1;
                     end
                 end
@@ -103,7 +103,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'h82;//command code
+                        data  <= {2'b00,8'h82};//command code
                         start <= 1'b1;
                     end
                 end
@@ -113,7 +113,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'hFF;//argument
+                        data  <= {2'b00,8'hFF};//argument
                         start <= 1'b1;
                     end
                 end  
@@ -123,7 +123,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'h83;//command code
+                        data  <= {2'b00,8'h83};//command code
                         start <= 1'b1;
                     end
                 end
@@ -133,7 +133,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'hFF;//argument
+                        data  <= {2'b00,8'hFF};//argument
                         start <= 1'b1;
                     end
                 end
@@ -143,7 +143,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'h87;//command code
+                        data  <= {2'b00,8'h87};//command code
                         start <= 1'b1;
                     end
                 end
@@ -153,7 +153,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'h06;//argument
+                        data  <= {2'b00,8'h06};//argument
                         start <= 1'b1;
                     end
                 end
