@@ -45,7 +45,15 @@ module OLED_Init
     end
 
     //initialize
-    parameter DISPLAY_OFF = 8'd0;
+    parameter DISPLAY_OFF                     = 8'd0;
+    parameter SET_CONTRAST_A                  = 8'd1;//blue
+    parameter SET_CONTRAST_A_ARGUMENT         = 8'd2;
+    parameter SET_CONTRAST_B                  = 8'd3;//green
+    parameter SET_CONTRAST_B_ARGUMENT         = 8'd4;
+    parameter SET_CONTRAST_C                  = 8'd5;//red
+    parameter SET_CONTRAST_C_ARGUMENT         = 8'd6;
+    parameter MASTER_CURRENT_CONTROL          = 8'd7;
+    parameter MASTER_CURRENT_CONTROL_ARGUMENT = 8'd8;
     reg [7:0]state;
     reg [7:0]data;
     reg start;
@@ -65,10 +73,90 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= 8'hAE;
+                        data  <= 8'hAE;// commmand code
                         start <= 1'b1;
                     end
-                end 
+                end
+                SET_CONTRAST_A:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'h81;//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_CONTRAST_A_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'hFF;//argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_CONTRAST_B:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'h82;//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_CONTRAST_B_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'hFF;//argument
+                        start <= 1'b1;
+                    end
+                end  
+                SET_CONTRAST_C:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'h83;//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_CONTRAST_C_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'hFF;//argument
+                        start <= 1'b1;
+                    end
+                end
+                MASTER_CURRENT_CONTROL:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'h87;//command code
+                        start <= 1'b1;
+                    end
+                end
+                MASTER_CURRENT_CONTROL_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= 8'h06;//argument
+                        start <= 1'b1;
+                    end
+                end
                 default: 
             endcase
         end
