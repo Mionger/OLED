@@ -54,6 +54,12 @@ module OLED_Init
     parameter SET_CONTRAST_C_ARGUMENT         = 8'd6;
     parameter MASTER_CURRENT_CONTROL          = 8'd7;
     parameter MASTER_CURRENT_CONTROL_ARGUMENT = 8'd8;
+    parameter SET_PRECHARGE_SPEED_A           = 8'd9;
+    parameter SET_PRECHARGE_SPEED_A_ARGUMENT  = 8'd10;
+    parameter SET_PRECHARGE_SPEED_B           = 8'd11;
+    parameter SET_PRECHARGE_SPEED_B_ARGUMENT  = 8'd12;
+    parameter SET_PRECHARGE_SPEED_C           = 8'd13;
+    parameter SET_PRECHARGE_SPEED_C_ARGUMENT  = 8'd14;
     reg [7:0]state;
     reg [9:0]data;
     reg start;
@@ -154,6 +160,66 @@ module OLED_Init
                     end
                     else begin
                         data  <= {2'b00,8'h06};//argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_A:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h8A};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_A_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h64};//argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_B:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h8B};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_B_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h78};//argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_C:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h8C};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_PRECHARGE_SPEED_C_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h64};//argument
                         start <= 1'b1;
                     end
                 end
