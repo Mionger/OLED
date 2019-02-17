@@ -1,5 +1,11 @@
 # OLED
 <pre>
+Update 2019-2-17 v0.0.5
+  1.Update file OLEDInit.v(Add more settings of initialization)
+  2.Update file SPIWrite.v(Add form detail of input data)
+</pre>
+
+<pre>
 Update 2019-2-16 v0.0.4
   1.Update file OLEDInit.v(Add Initialize of SET_PRECHARGE_SPEED)
 </pre>
