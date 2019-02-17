@@ -60,16 +60,23 @@ module OLED_Init
     parameter SET_PRECHARGE_SPEED_B_ARGUMENT  = 8'd12;
     parameter SET_PRECHARGE_SPEED_C           = 8'd13;
     parameter SET_PRECHARGE_SPEED_C_ARGUMENT  = 8'd14;
+    parameter SET_REMAP                       = 8'd15;
+    parameter SET_REMAP_ARGUMENT              = 8'd16;
+    parameter SET_DISPLAY_START_LINE          = 8'd17;
+    parameter SET_DISPLAY_START_LINE_ARGUMENT = 8'd18;
+    parameter SET_DISPLAY_OFFSET              = 8'd19;
+    parameter SET_DISPLAY_OFFSET_ARGUMENT     = 8'd20;
+    parameter NORMAL_DISPLAY                  = 8'd21;
     reg [7:0]state;
     reg [9:0]data;
     reg start;
     reg done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            		state <= 8'd0;
-			start <= 1'b0;
-			done  <= 1'b0;
-			data  <= {2'b11,8'h00};
+            state <= 8'd0;
+            start <= 1'b0;
+            done  <= 1'b0;
+            data  <= {2'b11,8'h00};
         end
         else if (START & rst_done) begin
             case (state)
@@ -99,7 +106,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'hFF};//argument
+                        data  <= {2'b00,8'hFF};//command argument
                         start <= 1'b1;
                     end
                 end
@@ -119,7 +126,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'hFF};//argument
+                        data  <= {2'b00,8'hFF};//command argument
                         start <= 1'b1;
                     end
                 end  
@@ -139,7 +146,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'hFF};//argument
+                        data  <= {2'b00,8'hFF};//command argument
                         start <= 1'b1;
                     end
                 end
@@ -159,7 +166,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'h06};//argument
+                        data  <= {2'b00,8'h06};//command argument
                         start <= 1'b1;
                     end
                 end
@@ -179,7 +186,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'h64};//argument
+                        data  <= {2'b00,8'h64};//command argument
                         start <= 1'b1;
                     end
                 end
@@ -199,7 +206,7 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'h78};//argument
+                        data  <= {2'b00,8'h78};//command argument
                         start <= 1'b1;
                     end
                 end
@@ -219,7 +226,77 @@ module OLED_Init
                         start <= 1'b0;
                     end
                     else begin
-                        data  <= {2'b00,8'h64};//argument
+                        data  <= {2'b00,8'h64};//command argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_REMAP:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'hA0};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_REMAP_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h72};//command argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_DISPLAY_START_LINE:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'hA1};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_DISPLAY_START_LINE_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h00};//command argument
+                        start <= 1'b1;
+                    end
+                end
+                SET_DISPLAY_OFFSET:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'hA2};//command code
+                        start <= 1'b1;
+                    end
+                end
+                SET_DISPLAY_OFFSET_ARGUMENT:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'h00};//command argument
+                        start <= 1'b1;
+                    end
+                end
+                NORMAL_DISPLAY:begin
+                    if(WRITE_DONE) begin
+                        state <= state + 1'b1;
+                        start <= 1'b0;
+                    end
+                    else begin
+                        data  <= {2'b00,8'hA4};//command code
                         start <= 1'b1;
                     end
                 end
