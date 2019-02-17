@@ -11,7 +11,7 @@ module SPIWrite
 	input CLK;
 	input RST_N;
 	input START;
-	input [9:0] DATA;
+	input [9:0] DATA;//command{2'b00,8'hXX}  data{2'b01,8'hXX}
 	
 	output DONE;
 	output [3:0]OUT;
