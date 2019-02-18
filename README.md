@@ -1,7 +1,7 @@
 # OLED  
 ## Update Log File  
 <pre>
-Update 2019-2-17 v0.0.5
+Update 2019-2-18 v0.0.6
   1.Add 1 file OLED_Init.v(Add another version of initialization)
 </pre>
 
