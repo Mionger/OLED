@@ -2,6 +2,11 @@
 ## Update Log File  
 <pre>
 Update 2019-2-17 v0.0.5
+  1.Add 1 file OLED_Init.v(Add another version of initialization)
+</pre>
+
+<pre>
+Update 2019-2-17 v0.0.5
   1.Update file OLEDInit.v(Add more settings of initialization)
   2.Update file SPIWrite.v(Add form detail of input data)
 </pre>
