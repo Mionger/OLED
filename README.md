@@ -1,6 +1,12 @@
 # OLED  
 ## Update Log File  
 <pre>
+Update 2019-2-19 v0.0.8
+  1.Complete SPI.V
+  2.Simulate SPI.v successfully
+</pre>
+
+<pre>
 Update 2019-2-19 v0.0.7
   1.Delete 2 files OLED_Init.v,SPIWrite.v
   2.Add 1 file SPI.v
