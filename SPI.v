@@ -27,7 +27,7 @@ module SPI
     reg DIN;
 
     // divider
-    Divider divider(CLK,SCLK,80);
+    Divider#(4) divider(CLK,SCLK);
 
     // sclk fam
     parameter SCLK_L = 2'b00;
@@ -74,17 +74,23 @@ module SPI
     reg [2:0]spi_state  = SPI_IDLE;
     reg [3:0]spi_cnt    = 4'b0;
     reg spi_flag        = 1'b0;
+    reg [9:0]spi_data;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
             spi_state <= SPI_IDLE;
-            CS <= 1'b1;
+            CS        <= 1'b1;
+            DONE      <= 1'b0;
+            spi_flag  <= 1'b0;
+            spi_cnt   <= 4'b0;
         end
         else begin
             case (spi_state)
                 SPI_IDLE:begin
                     CS        <= 1'b1;
+                    DONE      <= 1'b0;
                     if(START)begin
                         spi_state <= SPI_SEND;
+                        spi_data  <= DATA;
                     end
                 end
                 SPI_SEND:begin
@@ -95,16 +101,16 @@ module SPI
                                 spi_state <= SPI_OVER;
                             end 
                             else begin
-                                CS       <= DATA[9];
-                                DC       <= DATA[8];
-                                DIN      <= DATA[7];
+                                CS       <= spi_data[9];
+                                DC       <= spi_data[8];
+                                DIN      <= spi_data[7];
                                 spi_flag <= 1'b1;
                             end
                         end
                     end
                     else begin
                         if(sclk_state == SCLK_POSEDGE)begin
-                            DATA     <= {DATA[9],DATA[8],DATA[6:0],DATA[7]};
+                            spi_data <= {spi_data[9],spi_data[8],spi_data[6:0],spi_data[7]};
                             spi_cnt  <= spi_cnt + 4'b0001;
                             spi_flag <= 1'b0;
                         end
