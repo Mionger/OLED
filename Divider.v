@@ -5,16 +5,20 @@ module  Divider
     N
 );
     input DI;
-    output reg DO=0;
+    input N;
 
-    integer t_cnt=0;
-    always @(posedge DI)begin
+    output DO;
+
+    reg DO = 0;
+
+    integer t_cnt = 0;
+    always @(posedge DI) begin
         if(t_cnt<N/2-1) begin
-            t_cnt<=t_cnt+1;
+            t_cnt <= t_cnt + 1;
         end
         else begin
-            t_cnt<=0;
-            DO<=~DO;
+            t_cnt <= 0;
+            DO    <= ~DO;
         end
     end
 endmodule
