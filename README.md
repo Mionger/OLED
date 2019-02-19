@@ -1,6 +1,12 @@
 # OLED  
 ## Update Log File  
 <pre>
+Update 2019-2-19 v0.0.7
+  1.Delete 2 files OLED_Init.v,SPIWrite.v
+  2.Add 1 file SPI.v
+</pre>
+
+<pre>
 Update 2019-2-18 v0.0.6
   1.Add 1 file OLED_Init.v(Add another version of initialization)
 </pre>
