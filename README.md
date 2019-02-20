@@ -8,6 +8,12 @@
   
 ## Update Log File  
 <pre>
+Update 2019-2-21 v0.1.1
+  1.Add file OLED.v to link OLEDInit.v with SPI.v
+  2.Update Divider.v to replace passing argument into funtion called argument
+</pre>
+
+<pre>
 Update 2019-2-20 v0.1.0
   1.Complete OLEDInit.v
 </pre>
