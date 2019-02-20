@@ -1,5 +1,17 @@
 # OLED  
+  
+>## What to do next?
+>&nbsp;&nbsp;&nbsp;&nbsp;1.Simulate OLEDInit.v to DEBUG  
+>&nbsp;&nbsp;&nbsp;&nbsp;2.Draw line by basic SSD1331 command  
+>&nbsp;&nbsp;&nbsp;&nbsp;3.Draw rectangle by basic SSD1331 command     
+>&nbsp;&nbsp;&nbsp;&nbsp;4.Draw other picture by display data RAM
+  
 ## Update Log File  
+<pre>
+Update 2019-2-20 v0.1.0
+  1.Complete OLEDInit.v
+</pre>
+
 <pre>
 Update 2019-2-19 v0.0.8
   1.Complete SPI.V
