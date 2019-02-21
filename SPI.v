@@ -27,11 +27,7 @@ module SPI
     reg DIN;
 
     // divider
-<<<<<<< HEAD
     Divider#(2) divider(CLK,SCLK);  // Only for test , the function argument should be 80 
-=======
-    Divider#(2) divider(CLK,SCLK);
->>>>>>> oled_debug
 
     // sclk fam
     parameter SCLK_L = 2'b00;

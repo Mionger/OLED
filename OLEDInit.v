@@ -24,13 +24,8 @@ module OLED_Init
 
     //reset
     // parameter SECOND = 20'd1000000;
-<<<<<<< HEAD
     parameter SECOND = 20'd2;       //Only for debug test, the parameter should be 1000000
-    reg [19:0]count;
-=======
-    parameter SECOND = 20'd2;
     reg [19:0]count  = 20'd0;
->>>>>>> oled_debug
     reg rst_done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
