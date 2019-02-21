@@ -1,11 +1,42 @@
 # OLED  
 ## Project Information
-&nbsp;&nbsp;&nbsp;&nbsp;Developer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Mion-ger&nbsp;Park  
-&nbsp;&nbsp;&nbsp;&nbsp;Lastest Update&nbsp;: &nbsp;2019-2-22  
-&nbsp;&nbsp;&nbsp;&nbsp;version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;v0.1.0  
-&nbsp;&nbsp;&nbsp;&nbsp;OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Win10  
-&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Verilog HDL    
-&nbsp;&nbsp;&nbsp;&nbsp;software&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Vivado 2016  
+&nbsp;&nbsp;&nbsp;&nbsp;
+Developer
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: 
+&nbsp;
+Mion-ger
+&nbsp;
+Park  
+&nbsp;&nbsp;&nbsp;&nbsp;
+Lastest Update
+&nbsp;
+: 
+&nbsp;
+2019-2-22  
+&nbsp;&nbsp;&nbsp;&nbsp;
+Version
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: 
+&nbsp;
+v0.1.0  
+&nbsp;&nbsp;&nbsp;&nbsp;
+OS
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: 
+&nbsp;
+Win10  
+&nbsp;&nbsp;&nbsp;&nbsp;
+Language&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: 
+&nbsp;
+Verilog HDL    
+&nbsp;&nbsp;&nbsp;&nbsp;
+Software
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+: 
+&nbsp;
+Vivado 2016  
 
 >## Todo List(Update 2019-2-20)
 >&nbsp;&nbsp;&nbsp;&nbsp;1.Simulate OLEDInit.v to DEBUG  
@@ -16,7 +47,9 @@
 ## Update Log File  
 <pre>
 Update 2019-2-22 v0.1.2
-  1.Add Project Information in README.md
+  1.Add Project Information in README.md and Todo List
+  2.Fix the bug about reset
+  3.Correct spelling mistake of 'status'(previous versions spells as 'state')
 </pre>
 
 <pre>

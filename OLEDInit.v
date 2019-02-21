@@ -7,7 +7,7 @@ module OLED_Init
     SPI_START,      //spi write start
     SPI_DONE,       //spi write done
     DATA,           //spi data
-    RST_OLED        //hard interface reset
+    OLED_RST        //hard interface reset
 );
 
     input CLK;
@@ -18,29 +18,30 @@ module OLED_Init
     output DONE;
     output SPI_START;
     output [9:0]DATA;
-    output RST_OLED;
+    output OLED_RST;
 
-    reg RST_OLED;
+    reg OLED_RST;
 
     //reset
-    parameter SECOND = 20'd1000000;
-    reg [19:0]count;
+    // parameter SECOND = 20'd1000000;
+    parameter SECOND = 20'd2;
+    reg [19:0]count  = 20'd0;
     reg rst_done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            count<=20'd0;
-            RST_OLED<=1'b0;
-            rst_done<=1'b0;
+            count    <= 20'd0;
+            OLED_RST <= 1'b0;
+            rst_done <= 1'b0;
         end
         else if (count == SECOND) begin
-            count<=20'd0;
-            RST_OLED<=1'b1;
-            rst_done<=1'b1;
+            // count    <= 20'd0;
+            OLED_RST <= 1'b1;
+            rst_done <= 1'b1;
         end
         else begin
-            count<=count + 1;
-            RST_OLED<=1'b0;
-            rst_done<=1'b0;
+            count    <= count + 20'd1;
+            OLED_RST <= 1'b0;
+            rst_done <= 1'b0;
         end
     end
 
@@ -83,22 +84,22 @@ module OLED_Init
     parameter SET_V_VOLTAGE_ARGUMENT             = 8'd35;
     parameter DISPLAY_ON                         = 8'd36;
     
-    reg [7:0]state = DISPLAY_OFF;
+    reg [7:0]status = DISPLAY_OFF;
     reg [9:0]data;
     reg start;
     reg done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            state <= 8'd0;
+            status <= 8'd0;
             start <= 1'b0;
             done  <= 1'b0;
             data  <= {2'b11,8'h00};
         end
         else if (START & rst_done) begin
-            case (state)
+            case (status)
                 DISPLAY_OFF:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -108,7 +109,7 @@ module OLED_Init
                 end
                 SET_CONTRAST_A:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -118,7 +119,7 @@ module OLED_Init
                 end
                 SET_CONTRAST_A_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -128,7 +129,7 @@ module OLED_Init
                 end
                 SET_CONTRAST_B:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -138,7 +139,7 @@ module OLED_Init
                 end
                 SET_CONTRAST_B_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -148,7 +149,7 @@ module OLED_Init
                 end  
                 SET_CONTRAST_C:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -158,7 +159,7 @@ module OLED_Init
                 end
                 SET_CONTRAST_C_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -168,7 +169,7 @@ module OLED_Init
                 end
                 MASTER_CURRENT_CONTROL:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -178,7 +179,7 @@ module OLED_Init
                 end
                 MASTER_CURRENT_CONTROL_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -188,7 +189,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_A:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -198,7 +199,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_A_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -208,7 +209,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_B:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -218,7 +219,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_B_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -228,7 +229,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_C:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -238,7 +239,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_SPEED_C_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -248,7 +249,7 @@ module OLED_Init
                 end
                 SET_REMAP:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -258,7 +259,7 @@ module OLED_Init
                 end
                 SET_REMAP_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -268,7 +269,7 @@ module OLED_Init
                 end
                 SET_DISPLAY_START_LINE:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -278,7 +279,7 @@ module OLED_Init
                 end
                 SET_DISPLAY_START_LINE_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -288,7 +289,7 @@ module OLED_Init
                 end
                 SET_DISPLAY_OFFSET:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -298,7 +299,7 @@ module OLED_Init
                 end
                 SET_DISPLAY_OFFSET_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -308,7 +309,7 @@ module OLED_Init
                 end
                 NORMAL_DISPLAY:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -318,7 +319,7 @@ module OLED_Init
                 end
                 SET_MULTIPLEX_RATIO:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -328,7 +329,7 @@ module OLED_Init
                 end
                 SET_MULTIPLEX_RATIO_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -338,7 +339,7 @@ module OLED_Init
                 end
                 SET_MASTER_CONFIGURATION:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -348,7 +349,7 @@ module OLED_Init
                 end
                 SET_MASTER_CONFIGURATION_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -358,7 +359,7 @@ module OLED_Init
                 end
                 POWER_SAVE_MODE:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -368,7 +369,7 @@ module OLED_Init
                 end
                 POWER_SAVE_MODE_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -378,7 +379,7 @@ module OLED_Init
                 end
                 PHASE_PERIOD_ADJUSTMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -388,7 +389,7 @@ module OLED_Init
                 end
                 PHASE_PERIOD_ADJUSTMENT_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -398,7 +399,7 @@ module OLED_Init
                 end
                 DISPLAY_CLOCK_DIV:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -408,7 +409,7 @@ module OLED_Init
                 end
                 DISPLAY_CLOCK_DIV_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -418,7 +419,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_VOLTAGE:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -428,7 +429,7 @@ module OLED_Init
                 end
                 SET_PRECHARGE_VOLTAGE_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -438,7 +439,7 @@ module OLED_Init
                 end
                 SET_V_VOLTAGE:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -448,7 +449,7 @@ module OLED_Init
                 end
                 SET_V_VOLTAGE_ARGUMENT:begin
                     if(SPI_DONE) begin
-                        state <= state + 1'b1;
+                        status <= status + 1'b1;
                         start <= 1'b0;
                     end
                     else begin
@@ -456,13 +457,13 @@ module OLED_Init
                         start <= 1'b1;
                     end
                 end
-                default:begin
+                default:begin           //DISPLAY_ON
                     if(SPI_DONE) begin
                         start <= 1'b0;
                         done  <= 1'b1;
                     end
                     else begin
-                        data  <= {2'b00,8'hAF};//command argument
+                        data  <= {2'b00,8'hAF};//command code
                         start <= 1'b1;
                     end
                 end
