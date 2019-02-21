@@ -1,12 +1,24 @@
 # OLED  
-  
->## What to do next?
+## Project Information
+&nbsp;&nbsp;&nbsp;&nbsp;Developer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Mion-ger&nbsp;Park  
+&nbsp;&nbsp;&nbsp;&nbsp;Lastest Update&nbsp;: &nbsp;2019-2-22  
+&nbsp;&nbsp;&nbsp;&nbsp;version&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;v0.1.0  
+&nbsp;&nbsp;&nbsp;&nbsp;OS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Win10  
+&nbsp;&nbsp;&nbsp;&nbsp;language&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Verilog HDL    
+&nbsp;&nbsp;&nbsp;&nbsp;software&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;Vivado 2016  
+
+>## Todo List(Update 2019-2-20)
 >&nbsp;&nbsp;&nbsp;&nbsp;1.Simulate OLEDInit.v to DEBUG  
 >&nbsp;&nbsp;&nbsp;&nbsp;2.Draw line by basic SSD1331 command  
 >&nbsp;&nbsp;&nbsp;&nbsp;3.Draw rectangle by basic SSD1331 command     
 >&nbsp;&nbsp;&nbsp;&nbsp;4.Draw other picture by display data RAM
   
 ## Update Log File  
+<pre>
+Update 2019-2-22 v0.1.2
+  1.Add Project Information in README.md
+</pre>
+
 <pre>
 Update 2019-2-21 v0.1.1
   1.Add file OLED.v to link OLEDInit.v with SPI.v
