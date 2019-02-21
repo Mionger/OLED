@@ -27,41 +27,45 @@ module SPI
     reg DIN;
 
     // divider
+<<<<<<< HEAD
     Divider#(2) divider(CLK,SCLK);  // Only for test , the function argument should be 80 
+=======
+    Divider#(2) divider(CLK,SCLK);
+>>>>>>> oled_debug
 
     // sclk fam
     parameter SCLK_L = 2'b00;
     parameter SCLK_H = 2'b11;
     parameter SCLK_POSEDGE = 2'b01;
     parameter SCLK_NEGEDGE = 2'b10;
-    reg [1:0]sclk_state = SCLK_L;
+    reg [1:0]sclk_status = SCLK_L;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            sclk_state <= SCLK_L;
+            sclk_status <= SCLK_L;
         end
         else begin
-            case (sclk_state)
+            case (sclk_status)
                 SCLK_L:begin
                     if(SCLK) begin
-                        sclk_state <= SCLK_POSEDGE;
+                        sclk_status <= SCLK_POSEDGE;
                     end
                     else begin
-                        sclk_state <=SCLK_L;
+                        sclk_status <=SCLK_L;
                     end
                 end
                 SCLK_H:
                     if(!SCLK) begin
-                        sclk_state <= SCLK_NEGEDGE;
+                        sclk_status <= SCLK_NEGEDGE;
                     end
                     else begin
-                        sclk_state <=SCLK_H;
+                        sclk_status <=SCLK_H;
                     end
                 SCLK_POSEDGE: begin
-                    sclk_state <=SCLK_H;
+                    sclk_status <=SCLK_H;
                 end
                 default: 
                 begin
-                    sclk_state <=SCLK_L;
+                    sclk_status <=SCLK_L;
                 end
             endcase
         end
@@ -95,7 +99,7 @@ module SPI
                 end
                 SPI_SEND:begin
                     if(!spi_flag)begin
-                        if(sclk_state == SCLK_NEGEDGE)begin
+                        if(sclk_status == SCLK_NEGEDGE)begin
                             if(spi_cnt == 4'b1000)begin
                                 spi_cnt   <= 4'b0;
                                 spi_status <= SPI_OVER;
@@ -109,7 +113,8 @@ module SPI
                         end
                     end
                     else begin
-                        if(sclk_state == SCLK_POSEDGE)begin
+                        if(sclk_status == SCLK_POSEDGE)begin
+                            CS       <= 1'b1;
                             spi_data <= {spi_data[9],spi_data[8],spi_data[6:0],spi_data[7]};
                             spi_cnt  <= spi_cnt + 4'b0001;
                             spi_flag <= 1'b0;

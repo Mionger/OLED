@@ -7,7 +7,7 @@ module OLED_Init
     SPI_START,      //spi write start
     SPI_DONE,       //spi write done
     DATA,           //spi data
-    RST_OLED        //hard interface reset
+    OLED_RST        //hard interface reset
 );
 
     input CLK;
@@ -18,30 +18,35 @@ module OLED_Init
     output DONE;
     output SPI_START;
     output [9:0]DATA;
-    output RST_OLED;
+    output OLED_RST;
 
-    reg RST_OLED;
+    reg OLED_RST;
 
     //reset
     // parameter SECOND = 20'd1000000;
+<<<<<<< HEAD
     parameter SECOND = 20'd2;       //Only for debug test, the parameter should be 1000000
     reg [19:0]count;
+=======
+    parameter SECOND = 20'd2;
+    reg [19:0]count  = 20'd0;
+>>>>>>> oled_debug
     reg rst_done;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            count<=20'd0;
-            RST_OLED<=1'b0;
-            rst_done<=1'b0;
+            count    <= 20'd0;
+            OLED_RST <= 1'b0;
+            rst_done <= 1'b0;
         end
         else if (count == SECOND) begin
-            count<=20'd0;
-            RST_OLED<=1'b1;
-            rst_done<=1'b1;
+            // count    <= 20'd0;
+            OLED_RST <= 1'b1;
+            rst_done <= 1'b1;
         end
         else begin
-            count<=count + 1;
-            RST_OLED<=1'b0;
-            rst_done<=1'b0;
+            count    <= count + 20'd1;
+            OLED_RST <= 1'b0;
+            rst_done <= 1'b0;
         end
     end
 
@@ -457,13 +462,13 @@ module OLED_Init
                         start <= 1'b1;
                     end
                 end
-                default:begin
+                default:begin           //DISPLAY_ON
                     if(SPI_DONE) begin
                         start <= 1'b0;
                         done  <= 1'b1;
                     end
                     else begin
-                        data  <= {2'b00,8'hAF};//command argument
+                        data  <= {2'b00,8'hAF};//command code
                         start <= 1'b1;
                     end
                 end

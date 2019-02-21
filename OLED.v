@@ -29,6 +29,7 @@ module OLED
     wire init_done;
     OLED_Init init(CLK,RST_N,init_start,init_done,spi_start,spi_done,spi_data,OLED_RST);
 
+<<<<<<< HEAD
     parameter IDLE = 2'd0;
     parameter INIT = 2'd1;
     parameter INIT_DONE = 2'd2;
@@ -39,6 +40,25 @@ module OLED
         end
         else begin
             case (status)
+=======
+    parameter IDLE      = 2'd1;
+    parameter INIT      = 2'd2;
+    parameter INIT_DONE = 2'd3;
+    reg [1:0]status     = IDLE;
+    always @(posedge CLK or negedge RST_N) begin
+        if(!RST_N)begin
+            init_start <= 1'b0;
+            status     <= IDLE;
+        end
+        else begin
+            case (status)
+                default: begin  //IDLE
+                    init_start <= 1'b0;
+                    if(START)begin
+                        status <= INIT;
+                    end
+                end
+>>>>>>> oled_debug
                 INIT:begin
                     init_start <= 1'b1;
                     if(init_done)begin
@@ -48,6 +68,7 @@ module OLED
                 INIT_DONE:begin
                     init_start <= 1'b0;
                 end
+<<<<<<< HEAD
                 default: begin //IDLE
                     if(START) begin
                         //initialize
@@ -58,6 +79,8 @@ module OLED
                     end
                     
                 end
+=======
+>>>>>>> oled_debug
             endcase
         end
     end
