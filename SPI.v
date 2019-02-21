@@ -27,7 +27,7 @@ module SPI
     reg DIN;
 
     // divider
-    Divider#(4) divider(CLK,SCLK);
+    Divider#(2) divider(CLK,SCLK);  // Only for test , the function argument should be 80 
 
     // sclk fam
     parameter SCLK_L = 2'b00;
@@ -71,25 +71,25 @@ module SPI
     parameter SPI_IDLE  = 3'd0;
     parameter SPI_SEND  = 3'd1;
     parameter SPI_OVER  = 3'd2;
-    reg [2:0]spi_state  = SPI_IDLE;
+    reg [2:0]spi_status  = SPI_IDLE;
     reg [3:0]spi_cnt    = 4'b0;
     reg spi_flag        = 1'b0;
     reg [9:0]spi_data;
     always @(posedge CLK or negedge RST_N) begin
         if(!RST_N) begin
-            spi_state <= SPI_IDLE;
+            spi_status <= SPI_IDLE;
             CS        <= 1'b1;
             DONE      <= 1'b0;
             spi_flag  <= 1'b0;
             spi_cnt   <= 4'b0;
         end
         else begin
-            case (spi_state)
+            case (spi_status)
                 SPI_IDLE:begin
                     CS        <= 1'b1;
                     DONE      <= 1'b0;
                     if(START)begin
-                        spi_state <= SPI_SEND;
+                        spi_status <= SPI_SEND;
                         spi_data  <= DATA;
                     end
                 end
@@ -98,7 +98,7 @@ module SPI
                         if(sclk_state == SCLK_NEGEDGE)begin
                             if(spi_cnt == 4'b1000)begin
                                 spi_cnt   <= 4'b0;
-                                spi_state <= SPI_OVER;
+                                spi_status <= SPI_OVER;
                             end 
                             else begin
                                 CS       <= spi_data[9];
@@ -119,7 +119,7 @@ module SPI
                 default: begin
                     DONE      <= 1'b1;
                     CS        <= 1'b1;
-                    spi_state <= SPI_IDLE;
+                    spi_status <= SPI_IDLE;
                 end
             endcase
         end
