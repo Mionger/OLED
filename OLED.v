@@ -55,19 +55,6 @@ module OLED
                 INIT_DONE:begin
                     init_start <= 1'b0;
                 end
-<<<<<<< HEAD
-                default: begin //IDLE
-                    if(START) begin
-                        //initialize
-                        if(~init_done)begin
-                            status     <= INIT;
-                        end
-                        //do something else
-                    end
-                    
-                end
-=======
->>>>>>> oled_debug
             endcase
         end
     end
