@@ -13,13 +13,13 @@ Lastest Update
 &nbsp;
 : 
 &nbsp;
-2019-2-22  
+2019-2-23  
 &nbsp;&nbsp;&nbsp;&nbsp;
 Version
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 : 
 &nbsp;
-v0.1.0  
+v0.1.2  
 &nbsp;&nbsp;&nbsp;&nbsp;
 OS
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -45,6 +45,12 @@ Vivado 2016
 >&nbsp;&nbsp;&nbsp;&nbsp;4.Draw other picture by display data RAM
   
 ## Update Log File  
+<pre>
+Update 2019-2-22 v0.1.2
+  1.Try another way about SPI.v
+  2.Still have bug between SCLK and CS/DIN when SPI send over
+</pre>
+
 <pre>
 Update 2019-2-22 v0.1.2
   1.Add Project Information in README.md and Todo List
