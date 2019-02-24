@@ -13,13 +13,13 @@ Lastest Update
 &nbsp;
 : 
 &nbsp;
-2019-2-23  
+2019-2-24  
 &nbsp;&nbsp;&nbsp;&nbsp;
 Version
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 : 
 &nbsp;
-v0.1.2  
+v 0.1.4  
 &nbsp;&nbsp;&nbsp;&nbsp;
 OS
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -46,7 +46,14 @@ Vivado 2016
   
 ## Update Log File  
 <pre>
-Update 2019-2-22 v0.1.2
+Update 2019-2-24 v0.1.4
+  1.Conplete the another way about SPI.v
+  2.Fixed the bug of SPI.v`s timing
+  3.Next todo is connect SPI.v with OLED.v and simulate it
+</pre>
+
+<pre>
+Update 2019-2-23 v0.1.3
   1.Try another way about SPI.v
   2.Still have bug between SCLK and CS/DIN when SPI send over
 </pre>
